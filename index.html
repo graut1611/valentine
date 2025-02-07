@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Propose Day</title>
+    <style>
+        /* Full-screen romantic background */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://wallpapercave.com/wp/wp5486938.jpg') no-repeat center center;
+            background-size: 70%;
+            background-attachment: fixed;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* "Happy Propose Day!" styled like the button */
+        .extra-message {
+            background: linear-gradient(45deg, #ff4e50, #fc913a);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            position: absolute;
+            top: 60%; /* Further below */
+            transform: translateY(-50%);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Romantic message box */
+        .message {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            max-width: 60%;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            position: absolute;
+            top: 74%; /* Positioned further below */
+            transform: translateY(-50%);
+        }
+
+        /* Fancy button at the bottom */
+        .propose-btn {
+            background: linear-gradient(45deg, #ff4e50, #fc913a);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            outline: none;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            bottom: 8%;
+        }
+
+        .propose-btn:hover {
+            background: linear-gradient(45deg, #fc913a, #ff4e50);
+            transform: scale(1.05);
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: floatHeart 4s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Hidden Messages -->
+    <div class="extra-message" id="extra-message">
+        Happy Propose Day! 💕
+    </div>
+
+    <div class="message" id="message-box">
+        Dear Sneha - 
+        you are not just my wife, but my best friend, my happiness, and my greatest blessing. 
+        On this Propose Day, I promise to love, cherish, and stand by you forever. ❤️
+    </div>
+
+    <!-- Fancy Button at Bottom -->
+    <button class="propose-btn" onclick="showMessage()"> Special Message for you 💖</button>
+
+    <script>
+        let hasPlayedMusic = false;
+        let clickCount = 0;
+
+        function showMessage() {
+            let msgBox = document.getElementById('message-box');
+            let extraMsg = document.getElementById('extra-message');
+            let bgMusic = document.getElementById('bg-music');
+
+            // Show "Happy Propose Day!" on second click
+            if (clickCount === 0) {
+                msgBox.style.opacity = 1;
+            } 
+            // Show romantic message on third click
+            else if (clickCount === 1) {
+                extraMsg.style.opacity = 1;
+            }
+
+            // Play background music on first click
+            if (!hasPlayedMusic) {
+                bgMusic.play();
+                hasPlayedMusic = true;
+            }
+
+            clickCount++;
+
+            // Generate floating hearts
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart");
+                document.body.appendChild(heart);
+
+                // Randomize position and size
+                let randomX = Math.random() * window.innerWidth;
+                let randomSize = Math.random() * 20 + 10;
+                heart.style.left = `${randomX}px`;
+                heart.style.fontSize = `${randomSize}px`;
+                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+                // Remove heart after animation ends
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }
+        }
+    </script>
+
+</body>
+</html>
